@@ -16,3 +16,14 @@ func GenerateUID(len int) string {
 type Repository struct {
 	DB *gorm.DB
 }
+type ValidateErrorFormat struct {
+	Field string `json:"field,omitempty"`
+	Tag   string `json:"tag,omitempty"`
+	Value string `json:"value,omitempty"`
+}
+
+type ValidateError []*ValidateErrorFormat
+
+func NewValidationError() *ValidateError {
+	return &ValidateError{}
+}

@@ -9,10 +9,10 @@ import (
 type User struct {
 	ID        uint      `gorm:"primaryKey;autoIncrement" json:"-"`
 	Uid       string    `gorm:"not null;size:32" json:"-"`
-	FirstName string    `gorm:"not null;size:50" json:"firstName"`
-	LastName  string    `gorm:"size:50" json:"lastName,omitempty"`
-	Email     string    `gorm:"not null; unique" json:"email"`
-	Password  string    `gorm:"not null"`
+	FirstName string    `gorm:"not null;size:50" json:"firstName" validate:"required,min=3,max=50"`
+	LastName  string    `gorm:"size:50" json:"lastName,omitempty" validate:"max=50"`
+	Email     string    `gorm:"not null; unique" json:"email" validate:"required,email"`
+	Password  string    `gorm:"not null" validate:"required,min=8,max=128"`
 	CreatedAt time.Time `sql:"autoCreateTime" json:"-"`
 	UpdatedAt time.Time `sql:"autoUpdateTime" json:"-"`
 }

@@ -30,7 +30,7 @@ func main() {
 	repo := utils.Repository{db}
 	repo.DB.AutoMigrate(&data.User{}, &data.Session{})
 
-	auth := handlers.NewAuthProvider(&repo)
+	auth := handlers.NewAuthProvider(&repo, l)
 
 	sm := mux.NewRouter()
 	getRouter := sm.Methods("GET").Subrouter()
