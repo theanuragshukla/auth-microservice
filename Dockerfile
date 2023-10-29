@@ -1,4 +1,4 @@
-FROM golang:1.16.5 as builder
+FROM golang:1.21.3 as builder
 LABEL authors="Anurag"
 
 ENV GOOS linux
@@ -19,6 +19,7 @@ RUN apk add --no-cache ca-certificates
 
 COPY --from=builder app .
 
-EXPOSE 9090
+EXPOSE 9090:9090
 
 CMD ./app
+

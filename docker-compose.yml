@@ -1,0 +1,21 @@
+version: '3'
+services:
+  api:
+    image: auth
+    depends_on:
+      - postgres
+    ports:
+      - "9090:9090"
+    links:
+      - postgres
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=asdf1234
+      - POSTGRES_USER=anurag
+      - POSTGRES_DB=auth
+
