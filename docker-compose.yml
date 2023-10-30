@@ -1,7 +1,8 @@
 version: '3'
 services:
   api:
-    image: auth
+    build:
+      context: .
     depends_on:
       - postgres
     ports:

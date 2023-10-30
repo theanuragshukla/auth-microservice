@@ -16,6 +16,7 @@ import (
 )
 
 func main() {
+	viper.SetConfigName("app")
 	viper.SetConfigFile(".env")
 	viper.ReadInConfig()
 
