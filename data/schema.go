@@ -6,6 +6,11 @@ import (
 	"time"
 )
 
+type SchemaList struct {
+	User
+	Session
+}
+
 type User struct {
 	ID        uint      `gorm:"primaryKey;autoIncrement" json:"-"`
 	Uid       string    `gorm:"not null;size:32" json:"-"`

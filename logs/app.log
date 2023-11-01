@@ -1,0 +1,17 @@
+{"level":"info","timestamp":1698820429624764300,"caller":"auth-ms/main.go:80","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1698820438448161800,"caller":"auth-ms/main.go:66","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1698820466507305800,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"a33e14d1-d8e9-49dd-b059-63f640a68cac","ip":"127.0.0.1:57145"}
+{"level":"info","timestamp":1698820466814127600,"caller":"handlers/LoginHandler.go:58","msg":"email not in db","traceId":"a33e14d1-d8e9-49dd-b059-63f640a68cac","status":401}
+{"level":"info","timestamp":1698820589776065100,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"8598e8cb-45db-4af3-ba99-20ff1d868209","ip":"127.0.0.1:57217"}
+{"level":"info","timestamp":1698820589913924600,"caller":"handlers/LoginHandler.go:58","msg":"email not in db","traceId":"8598e8cb-45db-4af3-ba99-20ff1d868209","status":401}
+{"level":"info","timestamp":1698820600701231100,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"a754ab82-3429-4bf2-bf3c-ef0c4f26ed1e","ip":"127.0.0.1:57221"}
+{"level":"info","timestamp":1698820600804138500,"caller":"handlers/LoginHandler.go:58","msg":"email not in db","traceId":"a754ab82-3429-4bf2-bf3c-ef0c4f26ed1e","status":401}
+{"level":"info","timestamp":1698820617594946800,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"9a477265-8820-447b-adc6-f1a1d438eb75","ip":"127.0.0.1:57223"}
+{"level":"info","timestamp":1698820618067704400,"caller":"handlers/LoginHandler.go:66","msg":"wrong pass","traceId":"9a477265-8820-447b-adc6-f1a1d438eb75","status":401}
+{"level":"info","timestamp":1698820707895014300,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"b817edca-32d5-4951-a62d-71960e80bb83","ip":"127.0.0.1:57243"}
+{"level":"info","timestamp":1698820708230107900,"caller":"handlers/LoginHandler.go:66","msg":"wrong pass","traceId":"b817edca-32d5-4951-a62d-71960e80bb83","status":401}
+{"level":"info","timestamp":1698820745260726500,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"f304a5b9-5e2d-4681-bc24-2b58c3616f5f","ip":"127.0.0.1:57248"}
+{"level":"info","timestamp":1698820745793531800,"caller":"handlers/LoginHandler.go:66","msg":"wrong pass","traceId":"f304a5b9-5e2d-4681-bc24-2b58c3616f5f","status":401}
+{"level":"info","timestamp":1698820751283909500,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"bb81d955-b4c4-4767-a309-27d42ea6ea64","ip":"127.0.0.1:57249"}
+{"level":"info","timestamp":1698820751447710400,"caller":"handlers/LoginHandler.go:58","msg":"email not in db","traceId":"bb81d955-b4c4-4767-a309-27d42ea6ea64","status":401}
+{"level":"info","timestamp":1698820767451270200,"caller":"auth-ms/main.go:80","msg":"Got signal: interrupt"}

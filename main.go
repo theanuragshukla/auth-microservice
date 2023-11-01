@@ -3,12 +3,12 @@ package main
 import (
 	"auth-ms/data"
 	"auth-ms/handlers"
+	"auth-ms/middlewares"
 	"auth-ms/utils"
 	"context"
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/spf13/viper"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -16,24 +16,35 @@ import (
 )
 
 func main() {
+
+	// setting up logger
+	l := utils.CreateLogger()
+	_ = l.Sync()
+
+	// reading from env file
 	viper.SetConfigName("app")
 	viper.SetConfigFile(".env")
-	viper.ReadInConfig()
-
-	l := log.New(os.Stdout, "microservice", log.LstdFlags)
+	err := viper.ReadInConfig()
+	if err != nil {
+		l.Info("Error reading .env file")
+		l.Panic(err.Error())
+	}
 
 	db, err := data.GetDb()
 	if err != nil {
-		l.Fatal(err)
-		return
+		l.Info("Error connecting to db")
+		l.Fatal(err.Error())
 	}
 
 	repo := utils.Repository{db}
 	repo.DB.AutoMigrate(&data.User{}, &data.Session{})
 
-	auth := handlers.NewAuthProvider(&repo, l)
+	auth := handlers.NewProvider(&repo, l)
 
 	sm := mux.NewRouter()
+
+	sm.Use(middlewares.ReqIDMiddleware)
+
 	getRouter := sm.Methods("GET").Subrouter()
 	postRouter := sm.Methods("POST").Subrouter()
 
@@ -52,11 +63,11 @@ func main() {
 		IdleTimeout:  120 * time.Second,
 	}
 	go func() {
-		l.Println("Starting server on port 9090")
+		l.Info("Starting server on port 9090")
 
 		err := s.ListenAndServe()
 		if err != nil {
-			l.Printf("Error starting server: %s\n", err)
+			l.Error(fmt.Sprintf("Error starting server: %s\n", err))
 			os.Exit(1)
 		}
 	}()
@@ -66,7 +77,7 @@ func main() {
 	signal.Notify(c, os.Kill)
 
 	sig := <-c
-	log.Println("Got signal:", sig)
+	l.Info(fmt.Sprintf("Got signal: %s", sig))
 
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	s.Shutdown(ctx)

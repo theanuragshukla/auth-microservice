@@ -1,8 +1,8 @@
 package handlers
 
 import (
+	"auth-ms/middlewares"
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 )
@@ -12,8 +12,9 @@ type HomeResponse struct {
 	Msg    string `json:"msg"`
 }
 
-func (auth *AuthProvider) HomeHandler(rw http.ResponseWriter, r *http.Request) {
-	fmt.Println("request on /")
+func (auth *Provider) HomeHandler(rw http.ResponseWriter, r *http.Request) {
+	reqID := middlewares.GetTraceID(r)
+	auth.l.Info(reqID)
 	res := &HomeResponse{200, "Hello"}
 	e := json.NewEncoder(rw)
 	err := e.Encode(res)

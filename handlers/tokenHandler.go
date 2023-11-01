@@ -2,9 +2,11 @@ package handlers
 
 import (
 	"auth-ms/data"
+	"auth-ms/middlewares"
 	"encoding/json"
 	"github.com/golang-jwt/jwt"
 	"github.com/spf13/viper"
+	"go.uber.org/zap"
 	"io"
 	"net/http"
 )
@@ -20,12 +22,14 @@ func (res *TokenResponse) toJSON(w io.Writer) error {
 	err := enc.Encode(res)
 	return err
 }
-func (auth *AuthProvider) TokenHandler(w http.ResponseWriter, r *http.Request) {
+func (auth *Provider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 	RefreshToken := "x-refresh-token"
 	Uid := "uid"
-
 	uid := r.URL.Query().Get(Uid)
 	refreshToken := r.Header.Get(RefreshToken)
+
+	reqID := middlewares.GetTraceID(r)
+	auth.l.Info("/token", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr), zap.String("uid", uid))
 
 	response := TokenResponse{
 		Status: false,
@@ -33,6 +37,7 @@ func (auth *AuthProvider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(refreshToken) == 0 || len(uid) == 0 {
+		auth.l.Info("null token or uid", zap.String("traceId", reqID), zap.String("uid", uid), zap.String("refresh", refreshToken))
 		response.toJSON(w)
 		return
 	} else {
@@ -43,11 +48,13 @@ func (auth *AuthProvider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 		})
 
 		if err != nil || !token.Valid {
+			auth.l.Info(err.Error(), zap.String("traceId", reqID))
 			response.Msg = "Unable to parse refresh token"
 			response.toJSON(w)
 			return
 		}
 		if claims.Subject != "refresh" {
+			auth.l.Info("not refreshToken", zap.String("traceId", reqID))
 			response.Msg = "Invalid refresh token"
 			response.toJSON(w)
 			return
@@ -59,15 +66,20 @@ func (auth *AuthProvider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 			if dbUser.Uid == session.Uid {
 				tokens, err := GenerateTokens(*auth, dbUser)
 				if err != nil {
+					auth.l.Info("token error", zap.String("traceId", reqID))
 					response.toJSON(w)
 					return
 				}
+				auth.l.Info("token success", zap.String("traceId", reqID))
 				response.Status = true
 				response.Msg = "token generated"
 				response.Data = tokens
 				response.toJSON(w)
 				return
 			}
+			auth.l.Info("uid not in db", zap.String("traceId", reqID))
+		} else {
+			auth.l.Info("mismatch seed", zap.String("traceId", reqID))
 		}
 		response.toJSON(w)
 	}
