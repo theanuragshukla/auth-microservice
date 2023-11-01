@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/theanuragshukla/auth-microservice">
-    <img src="https://raw.githubusercontent.com/theanuragshukla/auth-microservice/master/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/theanuragshukla/auth-microservice/master/logo.png" alt="Logo" width="200" height="200">
   </a>
 
   <h3 align="center">Auth-ms</h3>
