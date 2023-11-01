@@ -17,7 +17,7 @@ type User struct {
 	FirstName string    `gorm:"not null;size:50" json:"firstName" validate:"required,min=3,max=50"`
 	LastName  string    `gorm:"size:50" json:"lastName,omitempty" validate:"max=50"`
 	Email     string    `gorm:"not null; unique" json:"email" validate:"required,email"`
-	Password  string    `gorm:"not null" validate:"required,min=8,max=128"`
+	Password  string    `gorm:"not null" validate:"required,min=8,max=128" json:"-"`
 	CreatedAt time.Time `sql:"autoCreateTime" json:"-"`
 	UpdatedAt time.Time `sql:"autoUpdateTime" json:"-"`
 }

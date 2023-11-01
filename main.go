@@ -51,6 +51,7 @@ func main() {
 	getRouter.HandleFunc("/", auth.HomeHandler)
 	getRouter.HandleFunc("/verify", auth.VerifyHandler)
 	getRouter.HandleFunc("/token", auth.TokenHandler)
+	getRouter.HandleFunc("/profile", auth.ProfileHandler)
 
 	postRouter.HandleFunc("/signup", auth.SignupHandler)
 	postRouter.HandleFunc("/login", auth.LoginHandler)

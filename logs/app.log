@@ -15,3 +15,23 @@
 {"level":"info","timestamp":1698820751283909500,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"bb81d955-b4c4-4767-a309-27d42ea6ea64","ip":"127.0.0.1:57249"}
 {"level":"info","timestamp":1698820751447710400,"caller":"handlers/LoginHandler.go:58","msg":"email not in db","traceId":"bb81d955-b4c4-4767-a309-27d42ea6ea64","status":401}
 {"level":"info","timestamp":1698820767451270200,"caller":"auth-ms/main.go:80","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1698829657033890500,"caller":"auth-ms/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1698829702984107200,"caller":"auth-ms/main.go:81","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1698829712776421100,"caller":"auth-ms/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1698829726168876900,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"5820a100-a7bc-4618-8da2-406e999fcc22","ip":"127.0.0.1:58285"}
+{"level":"info","timestamp":1698829727439519600,"caller":"handlers/LoginHandler.go:82","msg":"login success","traceId":"5820a100-a7bc-4618-8da2-406e999fcc22","uid":"1SufIpNqrnrWjASJYnMg1LlQR/AyheM8","status":200}
+{"level":"info","timestamp":1698829783968018500,"caller":"handlers/VerifyHandler.go:27","msg":"/verify","traceId":"1a0fd7b3-7b76-4964-90cf-e85246a2d03e","ip":"127.0.0.1:58286"}
+{"level":"info","timestamp":1698829783968018500,"caller":"handlers/VerifyHandler.go:46","msg":"invalid token","traceId":"1a0fd7b3-7b76-4964-90cf-e85246a2d03e"}
+{"level":"info","timestamp":1698829811104101400,"caller":"handlers/VerifyHandler.go:27","msg":"/verify","traceId":"cb579618-6430-4cdd-bb0a-393f9e417abe","ip":"127.0.0.1:58287"}
+{"level":"info","timestamp":1698829811104612200,"caller":"handlers/VerifyHandler.go:46","msg":"invalid token","traceId":"cb579618-6430-4cdd-bb0a-393f9e417abe"}
+{"level":"info","timestamp":1698829927627756000,"caller":"handlers/VerifyHandler.go:27","msg":"/verify","traceId":"1dd9873b-9f07-4771-b206-1f45f46a9688","ip":"127.0.0.1:58288"}
+{"level":"info","timestamp":1698829927934156100,"caller":"handlers/VerifyHandler.go:59","msg":"verified","traceId":"1dd9873b-9f07-4771-b206-1f45f46a9688","uid":"1SufIpNqrnrWjASJYnMg1LlQR/AyheM8"}
+{"level":"info","timestamp":1698829939276601300,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"155731eb-1d20-4d5d-a1ad-231366f3abda","ip":"127.0.0.1:58289"}
+{"level":"info","timestamp":1698829939914840700,"caller":"handlers/ProfileHandler.go:72","msg":"Profile returned","traceId":"155731eb-1d20-4d5d-a1ad-231366f3abda","uid":"1SufIpNqrnrWjASJYnMg1LlQR/AyheM8"}
+{"level":"info","timestamp":1698829977951851300,"caller":"auth-ms/main.go:81","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1698829987233951600,"caller":"auth-ms/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1698829992435266400,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"c7a09af8-9807-4472-9d2e-e0735a95d940","ip":"127.0.0.1:58294"}
+{"level":"info","timestamp":1698829993198349000,"caller":"handlers/ProfileHandler.go:72","msg":"Profile returned","traceId":"c7a09af8-9807-4472-9d2e-e0735a95d940","uid":"1SufIpNqrnrWjASJYnMg1LlQR/AyheM8"}
+{"level":"info","timestamp":1698829998907593800,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"65052009-3c98-4ae9-a2ca-d98dc46a510a","ip":"127.0.0.1:58295"}
+{"level":"info","timestamp":1698829998908465500,"caller":"handlers/ProfileHandler.go:47","msg":"invalid token","traceId":"65052009-3c98-4ae9-a2ca-d98dc46a510a"}
+{"level":"info","timestamp":1698830015618277100,"caller":"auth-ms/main.go:81","msg":"Got signal: interrupt"}
