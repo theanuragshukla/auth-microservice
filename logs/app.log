@@ -35,3 +35,20 @@
 {"level":"info","timestamp":1698829998907593800,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"65052009-3c98-4ae9-a2ca-d98dc46a510a","ip":"127.0.0.1:58295"}
 {"level":"info","timestamp":1698829998908465500,"caller":"handlers/ProfileHandler.go:47","msg":"invalid token","traceId":"65052009-3c98-4ae9-a2ca-d98dc46a510a"}
 {"level":"info","timestamp":1698830015618277100,"caller":"auth-ms/main.go:81","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1698897568432390356,"caller":"auth-microservice/main.go:29","msg":"Error reading .env file"}
+{"level":"panic","timestamp":1698897568432886580,"caller":"auth-microservice/main.go:30","msg":"open .env: no such file or directory","stacktrace":"main.main\n\t/home/anurag/auth-microservice/main.go:30\nruntime.main\n\t/usr/lib/go-1.19/src/runtime/proc.go:250"}
+{"level":"info","timestamp":1698912782087920398,"caller":"auth-microservice/main.go:29","msg":"Error reading .env file"}
+{"level":"panic","timestamp":1698912782088439433,"caller":"auth-microservice/main.go:30","msg":"open .env: no such file or directory","stacktrace":"main.main\n\t/home/anurag/auth-microservice/main.go:30\nruntime.main\n\t/usr/lib/go-1.19/src/runtime/proc.go:250"}
+{"level":"info","timestamp":1698912904945517076,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1698912914674438160,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"bc6609a5-092b-4650-b2b3-b401bb011f92","ip":"127.0.0.1:57502"}
+{"level":"info","timestamp":1698912914674787228,"caller":"handlers/SignupHandler.go:30","msg":"Invalid body","traceId":"bc6609a5-092b-4650-b2b3-b401bb011f92","status":400}
+{"level":"info","timestamp":1698912928273056742,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"8caed5d0-78e0-4f2d-978e-4beb1a050f1f","ip":"127.0.0.1:44022"}
+{"level":"info","timestamp":1698912928273172312,"caller":"handlers/SignupHandler.go:30","msg":"Invalid body","traceId":"8caed5d0-78e0-4f2d-978e-4beb1a050f1f","status":400}
+{"level":"info","timestamp":1698913321546821534,"caller":"auth-microservice/main.go:81","msg":"Got signal: interrupt"}
+{"level":"error","timestamp":1698913321548525571,"caller":"auth-microservice/main.go:71","msg":"Error starting server: http: Server closed\n","stacktrace":"main.main.func1\n\t/home/anurag/auth-microservice/main.go:71"}
+{"level":"info","timestamp":1698913325603790385,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1698913383365991185,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"c330c7d8-7fdb-4c21-824d-62e94078fba4","ip":"127.0.0.1:40738"}
+{"level":"info","timestamp":1698913383366213534,"caller":"handlers/LoginHandler.go:29","msg":"Invalid body","traceId":"c330c7d8-7fdb-4c21-824d-62e94078fba4","status":400}
+{"level":"info","timestamp":1698913408034451313,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"ece799e7-e5f4-41c0-8491-2a9c4f217fba","ip":"127.0.0.1:43068"}
+{"level":"info","timestamp":1698913541438105311,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"86a32b06-8c06-4fbc-8584-f6c01acdff02","ip":"127.0.0.1:38504"}
+{"level":"info","timestamp":1698913542307391100,"caller":"handlers/LoginHandler.go:82","msg":"login success","traceId":"86a32b06-8c06-4fbc-8584-f6c01acdff02","uid":"1SufIpNqrnrWjASJYnMg1LlQR/AyheM8","status":200}
