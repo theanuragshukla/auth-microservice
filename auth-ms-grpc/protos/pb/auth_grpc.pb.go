@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.25.0--rc2
-// source: auth.proto
+// source: protos/auth.proto
 
 package pb
 
@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Auth_Login_FullMethodName  = "/protos.Auth/Login"
-	Auth_Signup_FullMethodName = "/protos.Auth/Signup"
+	Auth_Login_FullMethodName  = "/Auth/Login"
+	Auth_Signup_FullMethodName = "/Auth/Signup"
 )
 
 // AuthClient is the client API for Auth service.
@@ -85,7 +85,7 @@ type UnsafeAuthServer interface {
 	mustEmbedUnimplementedAuthServer()
 }
 
-func RegisterAuthServer(s grpc.ServiceRegistrar, srv AuthServer) {
+func RegisterAuthServer(s grpc.ServiceRegistrar, srv interface{}) {
 	s.RegisterService(&Auth_ServiceDesc, srv)
 }
 
@@ -129,7 +129,7 @@ func _Auth_Signup_Handler(srv interface{}, ctx context.Context, dec func(interfa
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Auth_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "protos.Auth",
+	ServiceName: "Auth",
 	HandlerType: (*AuthServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -142,5 +142,5 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "auth.proto",
+	Metadata: "protos/auth.proto",
 }
