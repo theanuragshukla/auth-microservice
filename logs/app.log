@@ -69,3 +69,36 @@
 {"level":"info","timestamp":1701721722840735100,"caller":"server/Server.go:21","msg":"trying out proto"}
 {"level":"info","timestamp":1704204460500807100,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
 {"level":"info","timestamp":1704204487348146100,"caller":"auth-microservice/main.go:81","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1711455756339029600,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1711455829912011400,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"b4d30ca2-beef-48d8-b358-0dfb900e3355","ip":"[::1]:63772"}
+{"level":"info","timestamp":1711455829912580400,"caller":"handlers/SignupHandler.go:30","msg":"Invalid body","traceId":"b4d30ca2-beef-48d8-b358-0dfb900e3355","status":400}
+{"level":"info","timestamp":1711456225817258800,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"a5345400-da0b-4e23-8d31-eb89df3f0ec8","ip":"[::1]:64180"}
+{"level":"info","timestamp":1711456225822330300,"caller":"handlers/SignupHandler.go:38","msg":"Validation error","traceId":"a5345400-da0b-4e23-8d31-eb89df3f0ec8","status":400}
+{"level":"info","timestamp":1711456280481387500,"caller":"auth-microservice/main.go:81","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1711456305127398000,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1711456313002792000,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"d7d4c839-f9c6-4f91-9122-7c73428ab113","ip":"[::1]:64189"}
+{"level":"info","timestamp":1711456316870531700,"caller":"handlers/SignupHandler.go:84","msg":"signup success","traceId":"d7d4c839-f9c6-4f91-9122-7c73428ab113","status":200}
+{"level":"info","timestamp":1711456655230152800,"caller":"auth-microservice/main.go:81","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1711456667359794500,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1711456675946348000,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"3f902c06-2dba-4cec-9cf2-8687f17da275","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711456676322618400,"caller":"handlers/SignupHandler.go:72","msg":"duplicate email","traceId":"3f902c06-2dba-4cec-9cf2-8687f17da275","status":409}
+{"level":"info","timestamp":1711456684514539100,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"95ddeb3d-2b1b-4a0f-a026-29cefb4e233d","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711456685393879600,"caller":"handlers/SignupHandler.go:90","msg":"signup success","traceId":"95ddeb3d-2b1b-4a0f-a026-29cefb4e233d","status":200}
+{"level":"info","timestamp":1711456687683124800,"caller":"handlers/SignupHandler.go:24","msg":"/signup","traceId":"0763b232-8688-49f1-b6e1-2849ef7680a9","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711456687994909200,"caller":"handlers/SignupHandler.go:72","msg":"duplicate email","traceId":"0763b232-8688-49f1-b6e1-2849ef7680a9","status":409}
+{"level":"info","timestamp":1711456798676543500,"caller":"handlers/LoginHandler.go:24","msg":"/login","traceId":"9cadb2bc-ad82-4a94-b38c-1cf7cda25150","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711456800918752000,"caller":"handlers/LoginHandler.go:82","msg":"login success","traceId":"9cadb2bc-ad82-4a94-b38c-1cf7cda25150","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc","status":200}
+{"level":"info","timestamp":1711456874009521500,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"1fd3df9a-2263-40df-8304-d6244e1ee719","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711456876161163300,"caller":"handlers/ProfileHandler.go:72","msg":"Profile returned","traceId":"1fd3df9a-2263-40df-8304-d6244e1ee719","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc"}
+{"level":"info","timestamp":1711456921778108600,"caller":"handlers/VerifyHandler.go:27","msg":"/verify","traceId":"e477dbd1-a1d1-40a0-b0a2-182c4e535592","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711456921948749100,"caller":"handlers/VerifyHandler.go:59","msg":"verified","traceId":"e477dbd1-a1d1-40a0-b0a2-182c4e535592","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc"}
+{"level":"info","timestamp":1711456977898624900,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"7f3b02a3-75f8-4c93-a7ae-fd5c3c5d142a","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711456978185347300,"caller":"handlers/ProfileHandler.go:72","msg":"Profile returned","traceId":"7f3b02a3-75f8-4c93-a7ae-fd5c3c5d142a","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc"}
+{"level":"info","timestamp":1711457038920922500,"caller":"handlers/tokenHandler.go:32","msg":"/token","traceId":"1d6588af-4777-440f-89a1-9e52acaf4a73","ip":"[::1]:64262","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc"}
+{"level":"info","timestamp":1711457039644958400,"caller":"handlers/tokenHandler.go:73","msg":"token success","traceId":"1d6588af-4777-440f-89a1-9e52acaf4a73"}
+{"level":"info","timestamp":1711457046679856800,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"67db3551-bca2-4d79-bea8-a2cd88015f49","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711457046853058000,"caller":"handlers/ProfileHandler.go:75","msg":"seed mismatch or nil","traceId":"67db3551-bca2-4d79-bea8-a2cd88015f49","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc"}
+{"level":"info","timestamp":1711457110318517100,"caller":"handlers/ProfileHandler.go:28","msg":"/profile","traceId":"bc59d8bd-c981-4b4b-9abb-dad6fe6c679e","ip":"[::1]:64262"}
+{"level":"info","timestamp":1711457110601584300,"caller":"handlers/ProfileHandler.go:72","msg":"Profile returned","traceId":"bc59d8bd-c981-4b4b-9abb-dad6fe6c679e","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc"}
+{"level":"info","timestamp":1711457147956042300,"caller":"auth-microservice/main.go:81","msg":"Got signal: interrupt"}
+{"level":"error","timestamp":1711457148011272400,"caller":"auth-microservice/main.go:71","msg":"Error starting server: http: Server closed\n","stacktrace":"main.main.func1\n\tC:/Users/Anurag/Desktop/Go/auth-microservice/main.go:71"}

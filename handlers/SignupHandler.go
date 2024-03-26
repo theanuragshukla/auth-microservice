@@ -22,16 +22,16 @@ func handleSignupError(err string, w io.Writer) {
 func (auth *Provider) SignupHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
 	auth.L.Info("/signup", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
-	var user data.User
+	var signupReq SignupRequest
 	var response SignupResponse
-	err := json.NewDecoder(r.Body).Decode(&user)
+	err := json.NewDecoder(r.Body).Decode(&signupReq)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		auth.L.Info("Invalid body", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
 		handleSignupError("Invalid payload format! Unable to unmarshal", w)
 		return
 	}
-	err = auth.Validate.Struct(user)
+	err = auth.Validate.Struct(signupReq)
 	errors := utils.NewValidationError()
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
@@ -50,6 +50,12 @@ func (auth *Provider) SignupHandler(w http.ResponseWriter, r *http.Request) {
 		response.toJSON(w)
 		return
 	}
+
+	var user data.User
+	user.Email = signupReq.Email
+	user.Password = signupReq.Password
+	user.FirstName = signupReq.FirstName
+	user.LastName = signupReq.LastName
 	user.Uid = utils.GenerateUID(32)
 	pass := []byte(user.Password)
 	hashedPassword, err := bcrypt.GenerateFromPassword(pass, bcrypt.DefaultCost)
