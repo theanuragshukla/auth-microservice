@@ -12,9 +12,9 @@ import (
 )
 
 type Provider struct {
-	db       *utils.Repository
-	validate *validator.Validate
-	l        *zap.Logger
+	Db       *utils.Repository
+	Validate *validator.Validate
+	L        *zap.Logger
 }
 
 func NewProvider(repo *utils.Repository, logger *zap.Logger) *Provider {
@@ -22,7 +22,7 @@ func NewProvider(repo *utils.Repository, logger *zap.Logger) *Provider {
 }
 
 func (auth *Provider) SaveSession(uid, seed string) error {
-	res := auth.db.DB.Clauses(clause.OnConflict{
+	res := auth.Db.DB.Clauses(clause.OnConflict{
 		Columns:   []clause.Column{{Name: "uid"}},
 		DoUpdates: clause.AssignmentColumns([]string{"seed", "started_at"}),
 	}).Create(&data.Session{

@@ -29,7 +29,7 @@ func (auth *Provider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 	refreshToken := r.Header.Get(RefreshToken)
 
 	reqID := middlewares.GetTraceID(r)
-	auth.l.Info("/token", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr), zap.String("uid", uid))
+	auth.L.Info("/token", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr), zap.String("uid", uid))
 
 	response := TokenResponse{
 		Status: false,
@@ -37,7 +37,7 @@ func (auth *Provider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(refreshToken) == 0 || len(uid) == 0 {
-		auth.l.Info("null token or uid", zap.String("traceId", reqID), zap.String("uid", uid), zap.String("refresh", refreshToken))
+		auth.L.Info("null token or uid", zap.String("traceId", reqID), zap.String("uid", uid), zap.String("refresh", refreshToken))
 		response.toJSON(w)
 		return
 	} else {
@@ -48,38 +48,38 @@ func (auth *Provider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 		})
 
 		if err != nil || !token.Valid {
-			auth.l.Info(err.Error(), zap.String("traceId", reqID))
+			auth.L.Info(err.Error(), zap.String("traceId", reqID))
 			response.Msg = "Unable to parse refresh token"
 			response.toJSON(w)
 			return
 		}
 		if claims.Subject != "refresh" {
-			auth.l.Info("not refreshToken", zap.String("traceId", reqID))
+			auth.L.Info("not refreshToken", zap.String("traceId", reqID))
 			response.Msg = "Invalid refresh token"
 			response.toJSON(w)
 			return
 		}
-		auth.db.DB.Where("uid = ?", claims.Uid).First(&session)
+		auth.Db.DB.Where("uid = ?", claims.Uid).First(&session)
 		if session.Seed == claims.Seed && session.Uid == claims.Uid {
 			dbUser := data.User{}
-			auth.db.DB.Where("uid = ?", claims.Uid).First(&dbUser)
+			auth.Db.DB.Where("uid = ?", claims.Uid).First(&dbUser)
 			if dbUser.Uid == session.Uid {
 				tokens, err := GenerateTokens(*auth, dbUser)
 				if err != nil {
-					auth.l.Info("token error", zap.String("traceId", reqID))
+					auth.L.Info("token error", zap.String("traceId", reqID))
 					response.toJSON(w)
 					return
 				}
-				auth.l.Info("token success", zap.String("traceId", reqID))
+				auth.L.Info("token success", zap.String("traceId", reqID))
 				response.Status = true
 				response.Msg = "token generated"
 				response.Data = tokens
 				response.toJSON(w)
 				return
 			}
-			auth.l.Info("uid not in db", zap.String("traceId", reqID))
+			auth.L.Info("uid not in Db", zap.String("traceId", reqID))
 		} else {
-			auth.l.Info("mismatch seed", zap.String("traceId", reqID))
+			auth.L.Info("mismatch seed", zap.String("traceId", reqID))
 		}
 		response.toJSON(w)
 	}

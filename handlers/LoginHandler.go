@@ -21,21 +21,21 @@ func handleLoginError(err string, w io.Writer) {
 
 func (auth *Provider) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
-	auth.l.Info("/login", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
+	auth.L.Info("/login", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
 	var req LoginRequest
 	var response LoginResponse
 	err := req.fromJSON(r.Body)
 	if err != nil {
-		auth.l.Info("Invalid body", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
+		auth.L.Info("Invalid body", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
 		w.WriteHeader(http.StatusBadRequest)
 		handleLoginError("Invalid data! Unable to parse the payload", w)
 		return
 	}
 
-	err = auth.validate.Struct(req)
+	err = auth.Validate.Struct(req)
 	errors := utils.NewValidationError()
 	if err != nil {
-		auth.l.Info("Validation error", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
+		auth.L.Info("Validation error", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
 		for _, err := range err.(validator.ValidationErrors) {
 			var el utils.ValidateErrorFormat
 			el.Field = err.Field()
@@ -53,9 +53,9 @@ func (auth *Provider) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var dbUser data.User
-	err = auth.db.DB.Where("email = ?", req.Email).First(&data.User{}).Scan(&dbUser).Error
+	err = auth.Db.DB.Where("email = ?", req.Email).First(&data.User{}).Scan(&dbUser).Error
 	if err != nil {
-		auth.l.Info("email not in db", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized))
+		auth.L.Info("email not in Db", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized))
 		w.WriteHeader(http.StatusUnauthorized)
 		handleLoginError("Wrong username or password", w)
 		return
@@ -63,14 +63,14 @@ func (auth *Provider) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	err = bcrypt.CompareHashAndPassword([]byte(dbUser.Password), []byte(req.Password))
 	if err != nil {
 		w.WriteHeader(http.StatusUnauthorized)
-		auth.l.Info("wrong pass", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized))
+		auth.L.Info("wrong pass", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized))
 		handleLoginError("Wrong username or password", w)
 		return
 	}
 	tokens, err := GenerateTokens(*auth, dbUser)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		auth.l.Info("token error", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized))
+		auth.L.Info("token error", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized))
 		handleLoginError("Unexpected server error", w)
 		return
 	}
@@ -79,6 +79,6 @@ func (auth *Provider) LoginHandler(w http.ResponseWriter, r *http.Request) {
 		Msg:    "success",
 		Data:   tokens,
 	}
-	auth.l.Info("login success", zap.String("traceId", reqID), zap.String("uid", dbUser.Uid), zap.Int("status", http.StatusOK))
+	auth.L.Info("login success", zap.String("traceId", reqID), zap.String("uid", dbUser.Uid), zap.Int("status", http.StatusOK))
 	response.toJSON(w)
 }

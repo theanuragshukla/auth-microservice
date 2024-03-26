@@ -1,14 +1,22 @@
 version: '3'
 services:
   api:
-    build:
-      context: .
+    image: theanuragshukla/auth-ms
     depends_on:
       - postgres
     ports:
       - "9090:9090"
     links:
       - postgres
+    environment:
+      - PORT=9090
+      - DB_NAME=auth
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=anurag
+      - DB_PASS=asdf1234
+      - JWT_SECRET=thisissecret
+
   postgres:
     image: postgres:14-alpine
     ports:
