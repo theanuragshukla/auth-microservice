@@ -22,12 +22,12 @@ func main() {
 	_ = l.Sync()
 
 	// reading from env file
+	viper.AutomaticEnv()
 	viper.SetConfigName("app")
 	viper.SetConfigFile(".env")
 	err := viper.ReadInConfig()
 	if err != nil {
 		l.Info("Error reading .env file")
-		l.Panic(err.Error())
 	}
 
 	db, err := data.GetDb()
