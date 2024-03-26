@@ -25,7 +25,7 @@ func (res *ProfileResponse) toJSON(w io.Writer) error {
 
 func (auth *Provider) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
-	auth.l.Info("/profile", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
+	auth.L.Info("/profile", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
 	AccessToken := "x-access-token"
 	accessToken := r.Header.Get(AccessToken)
 	response := ProfileResponse{
@@ -33,7 +33,7 @@ func (auth *Provider) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 		Msg:    "Access token not provided",
 	}
 	if len(accessToken) == 0 {
-		auth.l.Info("token nil", zap.String("traceId", reqID))
+		auth.L.Info("token nil", zap.String("traceId", reqID))
 		response.toJSON(w)
 		return
 	} else {
@@ -44,23 +44,23 @@ func (auth *Provider) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 		})
 
 		if err != nil || !token.Valid {
-			auth.l.Info("invalid token", zap.String("traceId", reqID))
+			auth.L.Info("invalid token", zap.String("traceId", reqID))
 			response.Msg = "Unable to parse access token"
 			response.toJSON(w)
 			return
 		}
 		if claims.Subject != "access" {
-			auth.l.Info("not accessToken", zap.String("traceId", reqID))
+			auth.L.Info("not accessToken", zap.String("traceId", reqID))
 			response.Msg = "Invalid access token"
 			response.toJSON(w)
 			return
 		}
-		auth.db.DB.Where("uid = ?", claims.Uid).First(&session)
+		auth.Db.DB.Where("uid = ?", claims.Uid).First(&session)
 		if session.Seed == claims.Seed {
 			var dbUser data.User
-			err = auth.db.DB.Where("uid = ?", claims.Uid).First(&data.User{}).Scan(&dbUser).Error
+			err = auth.Db.DB.Where("uid = ?", claims.Uid).First(&data.User{}).Scan(&dbUser).Error
 			if err != nil {
-				auth.l.Info("uid not in db", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized), zap.String("uid", claims.Uid))
+				auth.L.Info("uid not in Db", zap.String("traceId", reqID), zap.Int("status", http.StatusUnauthorized), zap.String("uid", claims.Uid))
 				w.WriteHeader(http.StatusUnauthorized)
 				handleLoginError("Wrong username or password", w)
 				return
@@ -69,10 +69,10 @@ func (auth *Provider) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 			response.Msg = "verified"
 			response.Data = dbUser
 			response.toJSON(w)
-			auth.l.Info("Profile returned", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
+			auth.L.Info("Profile returned", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
 			return
 		} else {
-			auth.l.Info("seed mismatch or nil", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
+			auth.L.Info("seed mismatch or nil", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
 		}
 		response.Msg = "unverified"
 		response.toJSON(w)

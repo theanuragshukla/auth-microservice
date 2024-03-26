@@ -24,7 +24,7 @@ func (res *VerifyResponse) toJSON(w io.Writer) error {
 
 func (auth *Provider) VerifyHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
-	auth.l.Info("/verify", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
+	auth.L.Info("/verify", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
 	AccessToken := "x-access-token"
 	accessToken := r.Header.Get(AccessToken)
 	response := VerifyResponse{
@@ -32,7 +32,7 @@ func (auth *Provider) VerifyHandler(w http.ResponseWriter, r *http.Request) {
 		Msg:    "Access token not provided",
 	}
 	if len(accessToken) == 0 {
-		auth.l.Info("token nil", zap.String("traceId", reqID))
+		auth.L.Info("token nil", zap.String("traceId", reqID))
 		response.toJSON(w)
 		return
 	} else {
@@ -43,26 +43,26 @@ func (auth *Provider) VerifyHandler(w http.ResponseWriter, r *http.Request) {
 		})
 
 		if err != nil || !token.Valid {
-			auth.l.Info("invalid token", zap.String("traceId", reqID))
+			auth.L.Info("invalid token", zap.String("traceId", reqID))
 			response.Msg = "Unable to parse access token"
 			response.toJSON(w)
 			return
 		}
 		if claims.Subject != "access" {
-			auth.l.Info("not accessToken", zap.String("traceId", reqID))
+			auth.L.Info("not accessToken", zap.String("traceId", reqID))
 			response.Msg = "Invalid access token"
 			response.toJSON(w)
 			return
 		}
-		auth.db.DB.Where("uid = ?", claims.Uid).First(&session)
+		auth.Db.DB.Where("uid = ?", claims.Uid).First(&session)
 		if session.Seed == claims.Seed {
-			auth.l.Info("verified", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
+			auth.L.Info("verified", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
 			response.Status = true
 			response.Msg = "verified"
 			response.toJSON(w)
 			return
 		} else {
-			auth.l.Info("seed mismatch or nil", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
+			auth.L.Info("seed mismatch or nil", zap.String("traceId", reqID), zap.String("uid", claims.Uid))
 		}
 		response.Msg = "unverified"
 		response.toJSON(w)

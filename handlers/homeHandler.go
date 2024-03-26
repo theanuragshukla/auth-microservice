@@ -14,7 +14,7 @@ type HomeResponse struct {
 
 func (auth *Provider) HomeHandler(rw http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
-	auth.l.Info(reqID)
+	auth.L.Info(reqID)
 	res := &HomeResponse{200, "Hello"}
 	e := json.NewEncoder(rw)
 	err := e.Encode(res)

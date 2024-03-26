@@ -21,21 +21,21 @@ func handleSignupError(err string, w io.Writer) {
 }
 func (auth *Provider) SignupHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
-	auth.l.Info("/signup", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
+	auth.L.Info("/signup", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
 	var user data.User
 	var response SignupResponse
 	err := json.NewDecoder(r.Body).Decode(&user)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
-		auth.l.Info("Invalid body", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
+		auth.L.Info("Invalid body", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
 		handleSignupError("Invalid payload format! Unable to unmarshal", w)
 		return
 	}
-	err = auth.validate.Struct(user)
+	err = auth.Validate.Struct(user)
 	errors := utils.NewValidationError()
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			auth.l.Info("Validation error", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
+			auth.L.Info("Validation error", zap.String("traceId", reqID), zap.Int("status", http.StatusBadRequest))
 			var el utils.ValidateErrorFormat
 			el.Field = err.Field()
 			el.Tag = err.Tag()
@@ -54,16 +54,16 @@ func (auth *Provider) SignupHandler(w http.ResponseWriter, r *http.Request) {
 	pass := []byte(user.Password)
 	hashedPassword, err := bcrypt.GenerateFromPassword(pass, bcrypt.DefaultCost)
 	if err != nil {
-		auth.l.Info("hash error", zap.String("traceId", reqID), zap.Int("status", http.StatusInternalServerError))
+		auth.L.Info("hash error", zap.String("traceId", reqID), zap.Int("status", http.StatusInternalServerError))
 		w.WriteHeader(http.StatusInternalServerError)
 		handleSignupError("Unable to process the request", w)
 		return
 	}
 	user.Password = string(hashedPassword)
-	res := auth.db.DB.Create(&user)
+	res := auth.Db.DB.Create(&user)
 	if res.Error != nil {
 		w.WriteHeader(http.StatusConflict)
-		auth.l.Info("duplicate email", zap.String("traceId", reqID), zap.Int("status", http.StatusConflict))
+		auth.L.Info("duplicate email", zap.String("traceId", reqID), zap.Int("status", http.StatusConflict))
 		handleSignupError("Email address already in use", w)
 		return
 	}
@@ -71,7 +71,7 @@ func (auth *Provider) SignupHandler(w http.ResponseWriter, r *http.Request) {
 	tokens, err := GenerateTokens(*auth, user)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		auth.l.Info("token error", zap.String("traceId", reqID), zap.Int("status", http.StatusInternalServerError))
+		auth.L.Info("token error", zap.String("traceId", reqID), zap.Int("status", http.StatusInternalServerError))
 		handleLoginError("Unexpected server error", w)
 		return
 	}
@@ -81,6 +81,6 @@ func (auth *Provider) SignupHandler(w http.ResponseWriter, r *http.Request) {
 		Msg:    "success",
 		Data:   tokens,
 	}
-	auth.l.Info("signup success", zap.String("traceId", reqID), zap.Int("status", http.StatusOK))
+	auth.L.Info("signup success", zap.String("traceId", reqID), zap.Int("status", http.StatusOK))
 	ret.toJSON(w)
 }

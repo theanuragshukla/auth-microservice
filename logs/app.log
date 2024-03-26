@@ -66,3 +66,6 @@
 {"level":"info","timestamp":1701077370458183900,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
 {"level":"info","timestamp":1701077377391207200,"caller":"handlers/homeHandler.go:29","msg":"61e968d3-9e08-4d8c-95e4-7306cf508841"}
 {"level":"info","timestamp":1701078575019826800,"caller":"handlers/homeHandler.go:29","msg":"521546bb-db4a-4250-aa1b-77799d031de6"}
+{"level":"info","timestamp":1701721722840735100,"caller":"server/Server.go:21","msg":"trying out proto"}
+{"level":"info","timestamp":1704204460500807100,"caller":"auth-microservice/main.go:67","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1704204487348146100,"caller":"auth-microservice/main.go:81","msg":"Got signal: interrupt"}
