@@ -1,0 +1,115 @@
+definitions:
+    ProfileResponse:
+        description: ProfileResponse is the response model for the profile handler
+        x-go-package: auth-ms/handlers
+    SignupRequest:
+        x-go-package: auth-ms/handlers
+    Tokens:
+        x-go-package: auth-ms/data
+    User:
+        description: User represents the user schema for the database
+        x-go-package: auth-ms/data
+info: {}
+paths:
+    /:
+        get:
+            description: Returns a welcome message with status code 200
+            operationId: Home
+            responses:
+                "200":
+                    $ref: '#/responses/HomeResponse'
+            tags:
+                - home
+    /login:
+        post:
+            description: Returns Tokens and uid if the credentials provided are correct
+            operationId: login
+            parameters:
+                - description: Request body containing email and password
+                  in: body
+                  name: Body
+                  schema: {}
+            responses:
+                "200":
+                    $ref: '#/responses/LoginResponse'
+    /profile:
+        get:
+            description: Returns the user's profile
+            operationId: Profile
+            responses:
+                "200":
+                    description: ProfileResponse
+                    schema:
+                        $ref: '#/definitions/ProfileResponse'
+            tags:
+                - profile
+    /signup:
+        post:
+            description: Returns the user's profile
+            operationId: Signup
+            responses:
+                "200":
+                    $ref: '#/responses/SignupResponse'
+            tags:
+                - signup
+    /token:
+        get:
+            description: Refreshes the access token using the refresh token
+            operationId: Token
+            responses:
+                "200":
+                    $ref: '#/responses/TokenResponse'
+            tags:
+                - token
+    /verify:
+        get:
+            description: Verifies the validity of the access token
+            operationId: Verify
+            responses:
+                "200":
+                    $ref: '#/responses/VerifyResponse'
+            tags:
+                - verify
+responses:
+    HomeResponse:
+        description: HomeResponse is the response model for the home handler
+        headers:
+            msg:
+                type: string
+            status:
+                format: int64
+                type: integer
+    LoginResponse:
+        description: ""
+        headers:
+            data: {}
+            errors: {}
+            msg:
+                type: string
+            status:
+                type: boolean
+    SignupResponse:
+        description: ""
+        headers:
+            data: {}
+            errors: {}
+            msg:
+                type: string
+            status:
+                type: boolean
+    TokenResponse:
+        description: TokenResponse is the response model for the token endpoint
+        headers:
+            data: {}
+            msg:
+                type: string
+            status:
+                type: boolean
+    VerifyResponse:
+        description: VerifyResponse is the response model for the verify endpoint
+        headers:
+            msg:
+                type: string
+            status:
+                type: boolean
+swagger: "2.0"

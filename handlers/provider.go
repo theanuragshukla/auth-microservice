@@ -3,12 +3,13 @@ package handlers
 import (
 	"auth-ms/data"
 	"auth-ms/utils"
+	"time"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/golang-jwt/jwt"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"gorm.io/gorm/clause"
-	"time"
 )
 
 type Provider struct {

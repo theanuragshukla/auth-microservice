@@ -4,13 +4,16 @@ import (
 	"auth-ms/data"
 	"auth-ms/middlewares"
 	"encoding/json"
+	"io"
+	"net/http"
+
 	"github.com/golang-jwt/jwt"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
-	"io"
-	"net/http"
 )
 
+// VerifyResponse is the response model for the verify endpoint
+// swagger:response VerifyResponse
 type VerifyResponse struct {
 	Status bool   `json:"status"`
 	Msg    string `json:"msg,omitempty"`
@@ -22,6 +25,11 @@ func (res *VerifyResponse) toJSON(w io.Writer) error {
 	return err
 }
 
+
+// swagger:route GET /verify verify Verify
+// Verifies the validity of the access token
+// responses:
+// 200: VerifyResponse
 func (auth *Provider) VerifyHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
 	auth.L.Info("/verify", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))

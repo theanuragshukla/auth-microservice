@@ -5,11 +5,12 @@ import (
 	"auth-ms/middlewares"
 	"auth-ms/utils"
 	"encoding/json"
+	"io"
+	"net/http"
+
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
-	"io"
-	"net/http"
 )
 
 func handleSignupError(err string, w io.Writer) {
@@ -19,9 +20,17 @@ func handleSignupError(err string, w io.Writer) {
 	}
 	response.toJSON(w)
 }
+
+// SignupResponse is the response model for the signup endpoint
+// swagger:route POST /signup signup Signup
+// Returns the user's profile
+// responses:
+// 200: SignupResponse
+// swagger:parameters SignupRequest
 func (auth *Provider) SignupHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
 	auth.L.Info("/signup", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))
+	// in:body
 	var signupReq SignupRequest
 	var response SignupResponse
 	err := json.NewDecoder(r.Body).Decode(&signupReq)

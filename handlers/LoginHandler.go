@@ -1,14 +1,16 @@
 package handlers
 
 import (
+	"io"
+	"net/http"
+
 	"auth-ms/data"
 	"auth-ms/middlewares"
 	"auth-ms/utils"
+
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
-	"io"
-	"net/http"
 )
 
 func handleLoginError(err string, w io.Writer) {
@@ -18,6 +20,19 @@ func handleLoginError(err string, w io.Writer) {
 	}
 	response.toJSON(w)
 }
+
+// swagger:parameters login
+type LoginRequestParams struct {
+	// Request body containing email and password
+	//
+	// in: body
+	Body LoginRequest
+}
+
+// swagger:route POST /login login
+// Returns Tokens and uid if the credentials provided are correct
+// responses:
+// 200: LoginResponse
 
 func (auth *Provider) LoginHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)

@@ -102,3 +102,12 @@
 {"level":"info","timestamp":1711457110601584300,"caller":"handlers/ProfileHandler.go:72","msg":"Profile returned","traceId":"bc59d8bd-c981-4b4b-9abb-dad6fe6c679e","uid":"OAyFkcc7nYHqIsfe2XvI0W4/vJB83ofc"}
 {"level":"info","timestamp":1711457147956042300,"caller":"auth-microservice/main.go:81","msg":"Got signal: interrupt"}
 {"level":"error","timestamp":1711457148011272400,"caller":"auth-microservice/main.go:71","msg":"Error starting server: http: Server closed\n","stacktrace":"main.main.func1\n\tC:/Users/Anurag/Desktop/Go/auth-microservice/main.go:71"}
+{"level":"info","timestamp":1711464975596108042,"caller":"auth-microservice/main.go:91","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1711464983959133707,"caller":"handlers/homeHandler.go:24","msg":"4a28aef9-d8db-43f6-9c3c-44aa120856f8"}
+{"level":"info","timestamp":1711465152197611759,"caller":"auth-microservice/main.go:105","msg":"Got signal: interrupt"}
+{"level":"error","timestamp":1711465152198933514,"caller":"auth-microservice/main.go:95","msg":"Error starting server: http: Server closed\n","stacktrace":"main.main.func1\n\t/home/anurag/projects/auth-microservice/main.go:95"}
+{"level":"info","timestamp":1711465163187700325,"caller":"auth-microservice/main.go:92","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1711467506200811008,"caller":"auth-microservice/main.go:106","msg":"Got signal: interrupt"}
+{"level":"info","timestamp":1711640376057358753,"caller":"auth-microservice/main.go:91","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1711641266935882459,"caller":"auth-microservice/main.go:105","msg":"Got signal: interrupt"}
+{"level":"error","timestamp":1711641266938872200,"caller":"auth-microservice/main.go:95","msg":"Error starting server: http: Server closed\n","stacktrace":"main.main.func1\n\t/home/anurag/projects/auth-microservice/main.go:95"}

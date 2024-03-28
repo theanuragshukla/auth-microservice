@@ -2,8 +2,9 @@ package data
 
 import (
 	"encoding/json"
-	"github.com/golang-jwt/jwt"
 	"time"
+
+	"github.com/golang-jwt/jwt"
 )
 
 type SchemaList struct {
@@ -11,6 +12,8 @@ type SchemaList struct {
 	Session
 }
 
+// User represents the user schema for the database
+// swagger:model
 type User struct {
 	ID        uint      `gorm:"primaryKey;autoIncrement" json:"-"`
 	Uid       string    `gorm:"not null;size:32" json:"-"`
@@ -29,6 +32,8 @@ type Session struct {
 	StartedAt time.Time `sql:"autoCreateTime" json:"-"`
 }
 
+// swagger:model
+// Tokens represents the response structure for the login endpoint. It contains the UserId,  access and refresh tokens.
 type Tokens struct {
 	AccessToken  string `json:"accessToken,omitempty"`
 	RefreshToken string `json:"refreshToken,omitempty"`

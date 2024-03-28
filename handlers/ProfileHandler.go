@@ -4,13 +4,16 @@ import (
 	"auth-ms/data"
 	"auth-ms/middlewares"
 	"encoding/json"
+	"io"
+	"net/http"
+
 	"github.com/golang-jwt/jwt"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
-	"io"
-	"net/http"
 )
 
+// ProfileResponse is the response model for the profile handler
+// swagger:model
 type ProfileResponse struct {
 	Status bool      `json:"status"`
 	Msg    string    `json:"msg,omitempty"`
@@ -23,6 +26,10 @@ func (res *ProfileResponse) toJSON(w io.Writer) error {
 	return err
 }
 
+// swagger:route GET /profile profile Profile
+// Returns the user's profile
+// responses:
+// 200: ProfileResponse
 func (auth *Provider) ProfileHandler(w http.ResponseWriter, r *http.Request) {
 	reqID := middlewares.GetTraceID(r)
 	auth.L.Info("/profile", zap.String("traceId", reqID), zap.String("ip", r.RemoteAddr))

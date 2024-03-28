@@ -1,22 +1,40 @@
+// Package classification of Product API
+//
+// Documentation for Product API
+//
+//	Schemes: http
+//	BasePath: /
+//	Version: 1.0.0
+//
+//	Consumes:
+//	- application/json
+//
+//	Produces:
+//	- application/json
+//
+// swagger:meta
+
 package main
 
 import (
-	"auth-ms/data"
-	"auth-ms/handlers"
-	"auth-ms/middlewares"
-	"auth-ms/utils"
 	"context"
 	"fmt"
-	"github.com/gorilla/mux"
-	"github.com/spf13/viper"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
+
+	"auth-ms/data"
+	"auth-ms/handlers"
+	"auth-ms/middlewares"
+	"auth-ms/utils"
+
+	"github.com/go-openapi/runtime/middleware"
+	"github.com/gorilla/mux"
+	"github.com/spf13/viper"
 )
 
 func main() {
-
 	// setting up logger
 	l := utils.CreateLogger()
 	_ = l.Sync()
@@ -55,6 +73,12 @@ func main() {
 
 	postRouter.HandleFunc("/signup", auth.SignupHandler)
 	postRouter.HandleFunc("/login", auth.LoginHandler)
+
+	ops := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
+	docsHandler := middleware.Redoc(ops, nil)
+
+	getRouter.Handle("/docs", docsHandler)
+	getRouter.Handle("/swagger.yaml", http.FileServer(http.Dir("./")))
 
 	s := http.Server{
 		Addr:         fmt.Sprintf(":%s", viper.Get("PORT")),

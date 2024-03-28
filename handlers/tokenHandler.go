@@ -4,13 +4,16 @@ import (
 	"auth-ms/data"
 	"auth-ms/middlewares"
 	"encoding/json"
+	"io"
+	"net/http"
+
 	"github.com/golang-jwt/jwt"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
-	"io"
-	"net/http"
 )
 
+// TokenResponse is the response model for the token endpoint
+// swagger:response TokenResponse
 type TokenResponse struct {
 	Status bool        `json:"status"`
 	Msg    string      `json:"msg,omitempty"`
@@ -21,7 +24,13 @@ func (res *TokenResponse) toJSON(w io.Writer) error {
 	enc := json.NewEncoder(w)
 	err := enc.Encode(res)
 	return err
+
 }
+
+// swagger:route GET /token token Token
+// Refreshes the access token using the refresh token
+// responses:
+// 200: TokenResponse
 func (auth *Provider) TokenHandler(w http.ResponseWriter, r *http.Request) {
 	RefreshToken := "x-refresh-token"
 	Uid := "uid"
