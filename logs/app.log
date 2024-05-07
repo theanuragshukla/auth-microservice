@@ -111,3 +111,10 @@
 {"level":"info","timestamp":1711640376057358753,"caller":"auth-microservice/main.go:91","msg":"Starting server on port 9090"}
 {"level":"info","timestamp":1711641266935882459,"caller":"auth-microservice/main.go:105","msg":"Got signal: interrupt"}
 {"level":"error","timestamp":1711641266938872200,"caller":"auth-microservice/main.go:95","msg":"Error starting server: http: Server closed\n","stacktrace":"main.main.func1\n\t/home/anurag/projects/auth-microservice/main.go:95"}
+{"level":"info","timestamp":1715078793252132830,"caller":"auth-microservice/main.go:91","msg":"Starting server on port 9090"}
+{"level":"info","timestamp":1715078823623288300,"caller":"handlers/SignupHandler.go:32","msg":"/signup","traceId":"bd4fb8ef-6203-4e42-ae82-1b5a2bf3c332","ip":"127.0.0.1:41276"}
+{"level":"info","timestamp":1715078823681033572,"caller":"handlers/SignupHandler.go:99","msg":"signup success","traceId":"bd4fb8ef-6203-4e42-ae82-1b5a2bf3c332","status":200}
+{"level":"info","timestamp":1715079207752719653,"caller":"handlers/SignupHandler.go:32","msg":"/signup","traceId":"fdabb745-c5b9-4c32-baa9-cc74b4c6ab8f","ip":"127.0.0.1:43648"}
+{"level":"info","timestamp":1715079207807417289,"caller":"handlers/SignupHandler.go:81","msg":"duplicate email","traceId":"fdabb745-c5b9-4c32-baa9-cc74b4c6ab8f","status":409}
+{"level":"info","timestamp":1715079213065587549,"caller":"handlers/SignupHandler.go:32","msg":"/signup","traceId":"c64f88df-a18c-4566-96ca-f1e576468101","ip":"127.0.0.1:43662"}
+{"level":"info","timestamp":1715079213122654933,"caller":"handlers/SignupHandler.go:99","msg":"signup success","traceId":"c64f88df-a18c-4566-96ca-f1e576468101","status":200}

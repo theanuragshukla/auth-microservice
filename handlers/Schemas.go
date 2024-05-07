@@ -44,6 +44,12 @@ type SignupRequest struct {
 	Password  string `gorm:"not null" validate:"required,min=8,max=128" json:"password"`
 }
 
+func (req *SignupRequest) fromJSON(r io.Reader) error {
+	dec := json.NewDecoder(r)
+	err := dec.Decode(&req)
+	return err
+	}
+
 // swagger:response SignupResponse
 // SignupResponse is the response model for the signup endpoint
 type SignupResponse struct {
