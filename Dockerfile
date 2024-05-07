@@ -1,4 +1,4 @@
-FROM golang:1.21.3 as builder
+FROM golang:1.22.1 as builder
 LABEL authors="Anurag"
 
 ENV GOOS linux
