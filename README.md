@@ -116,7 +116,7 @@ go run main.go
 
 ### NOTE: While using the Docker/Docker-compose methods, Instead of building locally, You can also fetch a prebuilt container using the following command
 ```sh
-docker pull ghcr.io/theanuragshukla/auth-microservice:sha256-3f2a36a9358dcf2c38881ed2ab01afcd5ee7f695de9fb5b2c6e23590a4b81bd6.sig
+docker pull theanuragshukla/auth-ms
 ```
 
 ## Features
