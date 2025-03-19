@@ -130,7 +130,7 @@ docker pull theanuragshukla/auth-ms
 * Automatically DB Managements using GORM
 
 ## Documentation
-> TODO
+The technical documentation of this service is linked here in [DOCUMENTATION.md](DOCUMENTATION.md). Also find the `swagger.yml`	 file for client generation.
 
 ## Authors
 
